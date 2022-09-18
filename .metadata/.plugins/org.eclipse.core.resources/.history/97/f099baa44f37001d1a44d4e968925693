@@ -1,0 +1,90 @@
+package com.XoleKo.Main2048;
+
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+
+import javax.swing.JFrame;
+
+import com.XoleKo.Game2048.Game;
+
+public class Main extends Canvas implements Runnable {
+
+	private static final int WIDTH = 400, HEIGHT = 400;
+	private static float scale = 2.0f;
+
+	private JFrame frame;
+	private Thread thread;
+	private Game game;
+	private boolean running = false;
+
+	private static BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private static int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
+	public Main() {
+		setPreferredSize(new Dimension((int) (WIDTH * scale), (int) (HEIGHT * scale)));
+		frame = new JFrame();
+		game = new Game();
+	}
+
+	public void start() {
+		running = true;
+		thread = new Thread(this, "loopThread");
+		thread.start();
+	}
+
+	public void stop() {
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void update() {
+
+	}
+
+	public void render() {
+
+	}
+
+	public void run() {
+		long lastTimeInNanoSeconds = System.nanoTime();
+		long timer = System.currentTimeMillis();
+		double nanoSecondsPerUpdate = 1000000000.0 / 60.0;
+		double updatesToPerform = 0.0;
+		int frames = 0;
+		int updates = 0;
+		requestFocus();
+		
+		while (running) {
+			long currentTimeInNanoSeconds = System.nanoTime();
+			updatesToPerform += (currentTimeInNanoSeconds - lastTimeInNanoSeconds) / nanoSecondsPerUpdate;
+			if(updatesToPerform >= 1)
+			{
+				update();
+				updates++;
+				updatesToPerform;
+			}
+			lastTimeInNanoSeconds = currentTimeInNanoSeconds;
+			
+			render();
+			frames++;
+		}
+	}
+
+	public static void main(String[] args) {
+		Main m = new Main();
+		m.frame.setResizable(false);
+		m.frame.setTitle("2048");
+		m.frame.add(m);
+		m.frame.pack();
+		m.frame.setVisible(true);
+		m.frame.setLocationRelativeTo(null);
+		m.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		m.frame.setAlwaysOnTop(true);
+		m.start();
+	}
+}

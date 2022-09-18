@@ -1,0 +1,37 @@
+package com.XoleKo.GameObject;
+
+import java.util.Random;
+
+import com.XoleKo.Graphics.Renderer;
+import com.XoleKo.Graphics.Sprite;
+
+public class GameObject {
+	public double x, y;
+	public int width, height;
+	public Sprite sprite;
+	public int value, speed = 8;
+	public boolean moving = false, remove = false, hasMoved = false;
+
+	Random rand = new Random();
+
+	public GameObject(double x, double y) {
+		this.x = x;
+		this.y = y;
+		this.value = (rand.nextBoolean() ? 2 : 4);
+		createSprite();
+		this.width  = sprite.width;
+		this.height = sprite.height;
+	}
+
+	private void createSprite() {
+		
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void render() {
+		Renderer.renderSprite(sprite, (int) x, (int) y) ;
+	}
+}

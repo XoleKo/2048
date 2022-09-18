@@ -1,0 +1,8 @@
+package com.XoleKo.Graphics;
+
+import com.XoleKo.Main2048.Main;
+
+public class Renderer {
+	private static int width = Main.getWidth(), height = Main.getHeight();
+	
+}

@@ -1,0 +1,11 @@
+package com.XoleKo.GameObject;
+
+import com.XoleKo.Graphics.Sprite;
+
+public class GameObject {
+	public double x, y;
+	public int width , height;
+	public Sprite sprite;
+	public int value, speed = 8;
+	public int 
+}

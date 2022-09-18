@@ -1,0 +1,54 @@
+package com.XoleKo.Main2048;
+
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+
+import javax.swing.JFrame;
+
+import com.XoleKo.Game2048.Game;
+
+public class Main extends Canvas implements Runnable {
+
+	private static final int WIDTH = 400, HEIGHT = 400;
+	private static float scale = 2.0f;
+
+	private JFrame frame;
+	private Thread thread;
+	private Game game;
+	private boolean running = false;
+
+	private static BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private static int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
+	public Main() {
+		setPreferredSize(new Dimension((int) (WIDTH * scale), (int) (HEIGHT * scale)));
+		frame = new JFrame();
+		game = new Game();
+	}
+
+	public void start() {
+		
+	}
+
+	public void stop() {
+
+	}
+
+	public void update() {
+
+	}
+
+	public void render() {
+
+	}
+
+	public void run() {
+
+	}
+
+	public static void main(String[] args) {
+
+	}
+}
